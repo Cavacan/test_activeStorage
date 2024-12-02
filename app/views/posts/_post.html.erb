@@ -4,4 +4,17 @@
     <%= post.title %>
   </p>
 
+  <p>
+    <% if post.images.attached? %>
+      <h3>Attached Images: </h3>
+      <% post.images.each do |image| %>
+          <%= image_tag url_for(image) %>
+          <% if controller.action_name == "show" %>
+            <%= button_to 'Remove', remove_image_post_path(post, image_id: image.id), method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+          <% end %>
+      <% end %>
+    <% elsif controller.action_name == "show" %>
+      <p>No image.</p>
+    <% end %>
+  </p>
 </div>

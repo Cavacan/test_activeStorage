@@ -57,6 +57,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def remove_image
+    image = @post.images.find(params[:image_id])
+    image.purge
+    redirect_to edit_post_path(@post), notice: "image removed."
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -65,6 +71,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title)
+      params.require(:post).permit(:title, images: [])
     end
 end

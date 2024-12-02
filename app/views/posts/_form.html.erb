@@ -16,6 +16,10 @@
     <%= form.text_field :title %>
   </div>
 
+  <div class="activestorage">
+    <%= form.file_field :images, multiple: true %>
+  </div>
+
   <div>
     <%= form.submit %>
   </div>
