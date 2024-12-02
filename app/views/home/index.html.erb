@@ -1,0 +1,23 @@
+<h1>Home#index</h1>
+
+<div class="swiper">
+  <div class="swiper-wrapper">
+    <% Home.all.each do |home| %>
+      <% home.images.each do |image| %>
+        <div class="swiper-slide">
+          <%= image_tag image %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"></div>
+</div>
+
+<h2>Upload an Image</h2>
+<%= form_with model: @home_image, url: upload_images_home_index_path, local: true, html: { multipart: true } do |f| %>
+  <%= f.file_field :image, multiple: true %>
+  <%= f.submit "Upload Images", class: 'btn btn-primary' %>
+<% end %>
+

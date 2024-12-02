@@ -1,10 +1,4 @@
 Rails.application.routes.draw do
-  resources :posts do
-    member do
-      delete :remove_image
-    end
-  end
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -12,5 +6,12 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  root "posts#index"
+  root "home#index"
+  resources :home, only: [] do
+    collection do
+      get :manage_images
+      post :upload_images
+      delete :delete_images
+    end
+  end
 end
